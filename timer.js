@@ -1,29 +1,51 @@
 class Timer{
-    constructor(durationInput,startButton,pauseButton){
+    constructor(durationInput,startButton,pauseButton,callback){
         this.durationInput = durationInput;
         this.startButton = startButton;
         this.pauseButton = pauseButton;
 
-        this.durationInput.addEventListener('input',this.duration);
+        if(callback){
+            this.onStart = callback.onStart;
+            this.onTick = callback.onTick;
+            this.onComplete = callback.onComplete;
+        }
+        
         this.startButton.addEventListener('click', this.start);
         this.pauseButton.addEventListener('click', this.pause);
     }
 
-    start(){
-        console.log('timer started');
+    start = () =>{
+        if(this.onStart){
+            this.onStart();
+        }
+        this.tick();
+        this.interval = setInterval(this.tick,1000);
     }
-    pause(){
-        console.log('timer paused')
+    tick = () =>{
+        if(this.getTimer=== 0){
+            this.pause();
+            if(this.onComplete){
+                this.onComplete();
+            }
+        }else{
+            this.setTimer = this.getTimer -1;
+            if(this.onTick){
+                this.onTick();
+            }
+        }        
+       // console.log('tick tick')
+    }
+    get getTimer(){
+        return parseFloat(this.durationInput.value);
+    }
+    set setTimer(time){
+        this.durationInput.value = time;
+    }
+    pause=()=>{
+        clearInterval(this.interval);
     }
     duration(){
         console.log('duration entered')
     }
     
 }
-
-const durationInput = document.getElementById('duration');
-const startButton = document.getElementById('start');
-const pauseButton = document.getElementById('pause');
-
-
-const timer = new Timer(durationInput, startButton, pauseButton);
