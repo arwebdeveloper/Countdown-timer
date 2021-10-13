@@ -16,21 +16,21 @@ class Timer{
 
     start = () =>{
         if(this.onStart){
-            this.onStart();
+            this.onStart(this.getTimer);
         }
         this.tick();
-        this.interval = setInterval(this.tick,1000);
+        this.interval = setInterval(this.tick, 50);
     }
     tick = () =>{
-        if(this.getTimer=== 0){
+        if(this.getTimer <= 0){
             this.pause();
             if(this.onComplete){
                 this.onComplete();
             }
         }else{
-            this.setTimer = this.getTimer -1;
+            this.getTimer = this.getTimer - .05;
             if(this.onTick){
-                this.onTick();
+                this.onTick(this.getTimer);
             }
         }        
        // console.log('tick tick')
@@ -38,8 +38,8 @@ class Timer{
     get getTimer(){
         return parseFloat(this.durationInput.value);
     }
-    set setTimer(time){
-        this.durationInput.value = time;
+    set getTimer(time){
+        this.durationInput.value = time.toFixed(2);
     }
     pause=()=>{
         clearInterval(this.interval);
