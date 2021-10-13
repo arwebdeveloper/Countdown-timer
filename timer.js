@@ -19,7 +19,7 @@ class Timer{
             this.onStart(this.getTimer);
         }
         this.tick();
-        this.interval = setInterval(this.tick, 50);
+        this.interval = setInterval(this.tick, 20);
     }
     tick = () =>{
         if(this.getTimer <= 0){
@@ -28,7 +28,7 @@ class Timer{
                 this.onComplete();
             }
         }else{
-            this.getTimer = this.getTimer - .05;
+            this.getTimer = this.getTimer - 0.02;
             if(this.onTick){
                 this.onTick(this.getTimer);
             }
