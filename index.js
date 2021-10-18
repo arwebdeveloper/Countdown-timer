@@ -9,13 +9,14 @@ circle.setAttribute('stroke-dasharray', perimeter);
 let duration = 0;
 const timer = new Timer(durationInput, startButton, pauseButton, {
     onStart(getDuration) {
-        duration = getDuration;
         pauseButton.classList.remove('hide-btn');
         startButton.classList.add('hide-btn');
+        duration = getDuration;
     },
     onPause() {
         startButton.classList.remove('hide-btn')
         pauseButton.classList.add('hide-btn');
+        console.log('pause btn clicked')
     },
     onTick(getTimer) {
         // console.log('tick tick')
