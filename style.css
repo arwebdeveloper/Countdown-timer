@@ -10,6 +10,9 @@
   left: 50%;
   transform: translateX(-50%);
 }
+.hide-btn{
+  display: none;
+}
 
 * {
   font: inherit;
