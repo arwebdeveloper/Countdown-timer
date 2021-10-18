@@ -8,17 +8,23 @@ circle.setAttribute('stroke-dasharray', perimeter);
 
 let duration = 0;
 const timer = new Timer(durationInput, startButton, pauseButton, {
-    onStart(getDuration){
+    onStart(getDuration) {
         duration = getDuration;
+        pauseButton.classList.remove('hide-btn');
+        startButton.classList.add('hide-btn');
     },
-    onTick(getTimer){
+    onPause() {
+        startButton.classList.remove('hide-btn')
+        pauseButton.classList.add('hide-btn');
+    },
+    onTick(getTimer) {
         // console.log('tick tick')
         circle.setAttribute('stroke-dashoffset',
-        perimeter * getTimer / duration - perimeter
+            perimeter * getTimer / duration - perimeter
         );
-       
+
     },
-    onComplete(){
+    onComplete() {
         console.log('time completed')
     }
 });
